@@ -2,8 +2,9 @@
 import {TeamMatches} from "components/TeamMatches/TeamMatches";
 import {useEffect, useState} from "react";
 import {testSeries} from "tests/data/series";
-import {config} from "utils/config";
-import {ISeries, ITeam} from "../types/general";
+import {config} from "utils/queries";
+import {formatSeries} from "utils/formatters";
+import {ISeries, ITeam} from "../../types/series";
 import styles from './Home.module.scss';
 
 
@@ -11,8 +12,8 @@ import styles from './Home.module.scss';
 export const Home = () => {
 
 	/*** State ***/
-	const [series, setSeries] = useState({} as ISeries);
-	const [team, setTeam] = useState<any | null>(null);
+	const [series, setSeries] = useState<ISeries | null>(null);
+	const [team, setTeam] = useState<ITeam | null>(null);
 
 
 	/*** Effects ***/
@@ -33,39 +34,13 @@ export const Home = () => {
 		const result: any | Error = await response.json().catch((error: any) => error);
 		if(result instanceof Error) return console.log(result.message);
 
-		setSeries(formatTable(result))
+		setSeries(formatSeries(result))
 	};
 
-
-
-
-	const formatTable = (rawData: any): ISeries => {
-		const data = rawData.data.tournamentStage;
-		const teams: ITeam[] = data.standings?.[0].participants.map((team: any) => {
-			console.log(team);
-			const data: any = team.data.reduce((newData: any, dataPoint: any) => {
-				newData[dataPoint.code] = +dataPoint.value;
-				return newData;
-			}, {});
-			return {
-				id: team.participant.id,
-				title: team.participant.name,
-				rank: team.rank,
-				data,
-			}
-		});
-
-		const newData: ISeries = {
-			title: data.name,
-			teams,
-		}
-
-		return newData;
-	}
-
+	console.log(series)
 
 	/*** Return-JSX ***/
-	if(!series.title) return <p>Ingen data funnet</p>
+	if(!series?.title) return <p>Ingen data funnet</p>
 	return (
 		<div className={styles.Home}>
 			<h2>{series.title}</h2>
@@ -96,13 +71,13 @@ export const Home = () => {
 								<tr key={team.id}>
 									<td onClick={() => setTeam(team)}>{team.title}</td>
 									<td>{team.rank}</td>
-									<td>{data.played}</td>
-									<td>{data.wins}</td>
-									<td>{data.draws}</td>
-									<td>{data.defeits}</td>
-									<td>{data.goalsfor}</td>
-									<td>{data.goalsagainst}</td>
-									<td>{data.points}</td>
+									<td>{data?.played}</td>
+									<td>{data?.wins}</td>
+									<td>{data?.draws}</td>
+									<td>{data?.defeits}</td>
+									<td>{data?.goalsfor}</td>
+									<td>{data?.goalsagainst}</td>
+									<td>{data?.points}</td>
 								</tr>
 							)
 						})}

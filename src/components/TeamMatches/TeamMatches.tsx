@@ -1,17 +1,19 @@
-import {matchesMiddleware} from "next/dist/shared/lib/router/router";
+/***** IMPORTS *****/
 import {useEffect, useState} from "react";
-import {config} from "utils/config";
+import {IMatch} from "types/matches";
+import {formatMatches} from "utils/formatters";
+import {config} from "utils/queries";
 import styles from './TeamMatches.module.scss';
 
 export const TeamMatches = ({teamState}: any) => {
 
 	const [team, setTeam] = teamState;
-	const [matches, setMatches] = useState([] as any);
+	const [matches, setMatches] = useState<IMatch[] | null>(null);
 
 
 	useEffect(() => {
 		fetchTeam(team.id);
-	}, [team])
+	}, [team]) //eslint-disable-line react-hooks/exhaustive-deps
 
 
 	/**
@@ -28,7 +30,7 @@ export const TeamMatches = ({teamState}: any) => {
 		variables.participantId = teamId
 		const body = {query, variables}
 
-		if(matches.data) return;
+		if(matches?.length) return;
 		const response: Response | Error = await fetch(config.apiUrl, {method: 'post', body: JSON.stringify(body)}).catch((error) => error);
 		if(response instanceof Error) return console.log('ERROR FETCHING DATA: ', response.message);
 		const result: any | Error = await response.json().catch((error: any) => error);
@@ -37,43 +39,27 @@ export const TeamMatches = ({teamState}: any) => {
 		setMatches(formatMatches(result))
 	}
 
-	const formatMatches = (rawData: any) => {
-		const data = rawData.data.eventsByParticipantAndDateRange;
-		const matches = data.map((match: any) => {
-			return {
-				tournament: match.tournamentStage.name,
-				starts: match.startDate,
-				teams: match.participants.map((participant: any) => ({title: participant.participant.name, logo: participant.participant.images[0]?.url}))
-			};
-		}) 
-
-
-		return matches;
-	}
-
 	console.log(matches)
-
 	return (
 		<div className={styles.TeamMatches}>
-			<p onClick={() => setTeam(null)}>Gå tilbake</p>
+			<p className={styles.goBack} onClick={() => setTeam(null)}>Gå tilbake</p>
 			<h2>Kamper for {team.title}</h2>
 			<table>
 				<thead>
 					<tr>
-						<th>Hjemmelag</th>
-						<th>Bortelag</th>
+						<th>Kamp</th>
 						<th>Kampdato</th>
 						<th>Kamptid</th>
 					</tr>
 				</thead>
 				<tbody>
-					{matches.map((match: any) => {
+					{!matches?.length && <tr><td>... henter lag-data</td></tr>}
+					{matches?.map((match) => {
 						return (
-							<tr key={match.starts}>
-								<td>{match.teams[0].title}</td>
-								<td>{match.teams[1].title}</td>
-								<td>{new Date(match.starts).toLocaleDateString()}</td>
-								<td>{new Date(match.starts).toLocaleTimeString().replace(':00', '')}</td>
+							<tr key={match.id}>
+								<td>{match.title}</td>
+								<td>{match.startDate}</td>
+								<td>{match.startTime}</td>
 							</tr>
 						);
 					})}

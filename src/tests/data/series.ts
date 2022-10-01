@@ -1,4 +1,4 @@
-import {ISeries} from "components/types/general";
+import {ISeries} from "types/series";
 
 export const testSeries: ISeries = {
     "title": "Eliteserien",
@@ -7,6 +7,7 @@ export const testSeries: ISeries = {
             "id": "83af5c96-fe8d-4f60-a1ea-d89e01a14826",
             "title": "Molde",
             "rank": 1,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/83af5c96-fe8d-4f60-a1ea-d89e01a14826/83af5c96-fe8d-4f60-a1ea-d89e01a14826.png",
             "data": {
                 "points": 57,
                 "goalsfor": 54,
@@ -37,6 +38,7 @@ export const testSeries: ISeries = {
             "id": "0826ff02-eb88-498d-99df-bf050a909c82",
             "title": "Lillestrøm",
             "rank": 2,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/0826ff02-eb88-498d-99df-bf050a909c82/0826ff02-eb88-498d-99df-bf050a909c82.png",
             "data": {
                 "points": 41,
                 "goalsforaway": 20,
@@ -67,6 +69,7 @@ export const testSeries: ISeries = {
             "id": "f89518f8-1b6d-42da-97a4-5feb0290069c",
             "title": "Rosenborg",
             "rank": 3,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/f89518f8-1b6d-42da-97a4-5feb0290069c/f89518f8-1b6d-42da-97a4-5feb0290069c.png",
             "data": {
                 "playedaway": 11,
                 "drawshome": 2,
@@ -97,6 +100,7 @@ export const testSeries: ISeries = {
             "id": "d22c3d69-b040-48f5-a654-93b067c7a0af",
             "title": "FK Bodø/Glimt",
             "rank": 4,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/d22c3d69-b040-48f5-a654-93b067c7a0af/d22c3d69-b040-48f5-a654-93b067c7a0af.png",
             "data": {
                 "points": 42,
                 "rank": 4,
@@ -127,6 +131,7 @@ export const testSeries: ISeries = {
             "id": "8aaf5a0e-de53-4b68-aaa1-0b93fcfab78f",
             "title": "Vålerenga",
             "rank": 5,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/8aaf5a0e-de53-4b68-aaa1-0b93fcfab78f/8aaf5a0e-de53-4b68-aaa1-0b93fcfab78f.png",
             "data": {
                 "points": 39,
                 "rank": 5,
@@ -157,6 +162,7 @@ export const testSeries: ISeries = {
             "id": "4d27db7b-d66b-4026-a7a1-7d470dea4dd8",
             "title": "Viking",
             "rank": 6,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/4d27db7b-d66b-4026-a7a1-7d470dea4dd8/4d27db7b-d66b-4026-a7a1-7d470dea4dd8.png",
             "data": {
                 "points": 33,
                 "rank": 6,
@@ -187,6 +193,7 @@ export const testSeries: ISeries = {
             "id": "2552658a-8b23-405b-a7b6-8a45e138285c",
             "title": "Odd",
             "rank": 7,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/2552658a-8b23-405b-a7b6-8a45e138285c/2552658a-8b23-405b-a7b6-8a45e138285c.png",
             "data": {
                 "playedhome": 11,
                 "rank": 7,
@@ -217,6 +224,7 @@ export const testSeries: ISeries = {
             "id": "d2e74428-7777-47b8-9ee7-13f7b8cb2b25",
             "title": "Strømsgodset",
             "rank": 8,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/d2e74428-7777-47b8-9ee7-13f7b8cb2b25/d2e74428-7777-47b8-9ee7-13f7b8cb2b25.png",
             "data": {
                 "rank": 8,
                 "points": 32,
@@ -247,6 +255,7 @@ export const testSeries: ISeries = {
             "id": "ffeebf7a-daa6-4079-9a3e-4a81234b4021",
             "title": "Tromsø",
             "rank": 9,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/ffeebf7a-daa6-4079-9a3e-4a81234b4021/ffeebf7a-daa6-4079-9a3e-4a81234b4021.png",
             "data": {
                 "rank": 9,
                 "points": 31,
@@ -277,6 +286,7 @@ export const testSeries: ISeries = {
             "id": "bfbbe5c4-1181-4898-b202-8c5a226aa01e",
             "title": "Haugesund",
             "rank": 10,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/bfbbe5c4-1181-4898-b202-8c5a226aa01e/bfbbe5c4-1181-4898-b202-8c5a226aa01e.png",
             "data": {
                 "rank": 10,
                 "playedhome": 11,
@@ -307,6 +317,7 @@ export const testSeries: ISeries = {
             "id": "f15ba93e-de54-42c2-a2ca-9a3e47650786",
             "title": "Sarpsborg 08",
             "rank": 11,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/f15ba93e-de54-42c2-a2ca-9a3e47650786/f15ba93e-de54-42c2-a2ca-9a3e47650786.png",
             "data": {
                 "goalsagainsthome": 21,
                 "points": 28,
@@ -337,6 +348,7 @@ export const testSeries: ISeries = {
             "id": "c876f4dd-416e-4443-9210-34a70819be5d",
             "title": "Aalesund",
             "rank": 12,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/c876f4dd-416e-4443-9210-34a70819be5d/c876f4dd-416e-4443-9210-34a70819be5d.png",
             "data": {
                 "rank": 11,
                 "played": 23,
@@ -367,6 +379,7 @@ export const testSeries: ISeries = {
             "id": "2d9fd89b-8a02-417b-989a-b0b5441a12f3",
             "title": "HamKam",
             "rank": 12,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/2d9fd89b-8a02-417b-989a-b0b5441a12f3/2d9fd89b-8a02-417b-989a-b0b5441a12f3.png",
             "data": {
                 "points": 23,
                 "rank": 12,
@@ -397,6 +410,7 @@ export const testSeries: ISeries = {
             "id": "250949c3-92fa-49db-b60b-d4ae1c9a7c14",
             "title": "Sandefjord",
             "rank": 14,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/250949c3-92fa-49db-b60b-d4ae1c9a7c14/250949c3-92fa-49db-b60b-d4ae1c9a7c14.png",
             "data": {
                 "winsaway": 5,
                 "played": 23,
@@ -427,6 +441,7 @@ export const testSeries: ISeries = {
             "id": "005fd72e-c4dc-4611-a462-8c24c23243af",
             "title": "Kristiansund BK",
             "rank": 15,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/005fd72e-c4dc-4611-a462-8c24c23243af/005fd72e-c4dc-4611-a462-8c24c23243af.png",
             "data": {
                 "goalsagainst": 46,
                 "played": 23,
@@ -457,6 +472,7 @@ export const testSeries: ISeries = {
             "id": "980f929d-cf6e-4c27-8172-66c4fbc6942b",
             "title": "Jerv",
             "rank": 16,
+            "logo": "https://static-content.aws42.tv2.no/stage/participant/980f929d-cf6e-4c27-8172-66c4fbc6942b/980f929d-cf6e-4c27-8172-66c4fbc6942b.png",
             "data": {
                 "rank": 15,
                 "points": 14,

@@ -38,12 +38,15 @@ export const config = {
 						fromDate: $fromDate, 
 						toDate: $toDate
 					) {
+						id
 						startDate
+						name
 						tournamentStage {
 							name
 						}
 						participants {
 							participant {
+								id
 								name
 								images {url}
 							}

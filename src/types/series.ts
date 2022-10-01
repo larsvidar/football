@@ -29,12 +29,13 @@ export interface ITeamData {
 export interface ITeam {
 	id: string,
 	title: string,
-	rank: number,
-	data: ITeamData,
+	rank?: number,
+	data?: ITeamData,
+	logo?: string
 }
 
 
 export interface ISeries {
 	title: string,
-	teams: ITeam[],
+	teams?: ITeam[],
 }

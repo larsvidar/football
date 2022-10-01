@@ -2,6 +2,20 @@
 	background: #eee;
 	padding: 1em;
 
+	.goBack {
+		position: absolute;
+		right: 2em;
+		cursor: pointer;
+
+		&::before {
+			content: '< ';
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
 	table {
 		background: white;
 		text-align: left;
