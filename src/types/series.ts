@@ -1,5 +1,5 @@
 
-export interface ITeamData {
+interface ITeamDataFull {
 	points: number,
 	goalsfor: number,
 	winshome: number,
@@ -24,11 +24,13 @@ export interface ITeamData {
 	pointsaway: number,
 	trend: number,
 }
+export type ITeamData = Partial<ITeamDataFull>
 
 
 export interface ITeam {
 	id: string,
 	title: string,
+	slug: string,
 	rank?: number,
 	data?: ITeamData,
 	logo?: string

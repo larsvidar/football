@@ -6,6 +6,7 @@ export const testSeries: ISeries = {
         {
             "id": "83af5c96-fe8d-4f60-a1ea-d89e01a14826",
             "title": "Molde",
+            "slug": "Molde",
             "rank": 1,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/83af5c96-fe8d-4f60-a1ea-d89e01a14826/83af5c96-fe8d-4f60-a1ea-d89e01a14826.png",
             "data": {
@@ -26,17 +27,16 @@ export const testSeries: ISeries = {
                 "playedaway": 10,
                 "drawshome": 1,
                 "drawsaway": 2,
-                "defeitsaway": 0,
                 "goalsforaway": 20,
                 "goalsagainstaway": 8,
                 "pointshome": 28,
-                "pointsaway": 26,
-                "trend": 0
+                "pointsaway": 26
             }
         },
         {
             "id": "0826ff02-eb88-498d-99df-bf050a909c82",
             "title": "Lillestrøm",
+            "slug": "Lillestroem",
             "rank": 2,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/0826ff02-eb88-498d-99df-bf050a909c82/0826ff02-eb88-498d-99df-bf050a909c82.png",
             "data": {
@@ -61,20 +61,19 @@ export const testSeries: ISeries = {
                 "goalsagainsthome": 4,
                 "goalsagainstaway": 19,
                 "pointsaway": 18,
-                "pointshome": 23,
-                "trend": 0
+                "pointshome": 23
             }
         },
         {
             "id": "f89518f8-1b6d-42da-97a4-5feb0290069c",
             "title": "Rosenborg",
+            "slug": "Rosenborg",
             "rank": 3,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/f89518f8-1b6d-42da-97a4-5feb0290069c/f89518f8-1b6d-42da-97a4-5feb0290069c.png",
             "data": {
                 "playedaway": 11,
                 "drawshome": 2,
                 "drawsaway": 5,
-                "defeitshome": 0,
                 "defeitsaway": 3,
                 "points": 43,
                 "rank": 3,
@@ -99,6 +98,7 @@ export const testSeries: ISeries = {
         {
             "id": "d22c3d69-b040-48f5-a654-93b067c7a0af",
             "title": "FK Bodø/Glimt",
+            "slug": "Bodoe/Glimt",
             "rank": 4,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/d22c3d69-b040-48f5-a654-93b067c7a0af/d22c3d69-b040-48f5-a654-93b067c7a0af.png",
             "data": {
@@ -115,7 +115,6 @@ export const testSeries: ISeries = {
                 "playedhome": 12,
                 "playedaway": 10,
                 "drawshome": 6,
-                "drawsaway": 0,
                 "defeitshome": 1,
                 "defeitsaway": 3,
                 "goalsforhome": 33,
@@ -130,6 +129,7 @@ export const testSeries: ISeries = {
         {
             "id": "8aaf5a0e-de53-4b68-aaa1-0b93fcfab78f",
             "title": "Vålerenga",
+            "slug": "Vaalerenga",
             "rank": 5,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/8aaf5a0e-de53-4b68-aaa1-0b93fcfab78f/8aaf5a0e-de53-4b68-aaa1-0b93fcfab78f.png",
             "data": {
@@ -154,13 +154,13 @@ export const testSeries: ISeries = {
                 "goalsagainsthome": 10,
                 "goalsagainstaway": 19,
                 "pointshome": 25,
-                "pointsaway": 14,
-                "trend": 0
+                "pointsaway": 14
             }
         },
         {
             "id": "4d27db7b-d66b-4026-a7a1-7d470dea4dd8",
             "title": "Viking",
+            "slug": "Viking",
             "rank": 6,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/4d27db7b-d66b-4026-a7a1-7d470dea4dd8/4d27db7b-d66b-4026-a7a1-7d470dea4dd8.png",
             "data": {
@@ -185,13 +185,13 @@ export const testSeries: ISeries = {
                 "playedaway": 11,
                 "defeitsaway": 6,
                 "goalsforaway": 18,
-                "goalsagainstaway": 25,
-                "trend": 0
+                "goalsagainstaway": 25
             }
         },
         {
             "id": "2552658a-8b23-405b-a7b6-8a45e138285c",
             "title": "Odd",
+            "slug": "Odds Ballklubb",
             "rank": 7,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/2552658a-8b23-405b-a7b6-8a45e138285c/2552658a-8b23-405b-a7b6-8a45e138285c.png",
             "data": {
@@ -208,7 +208,6 @@ export const testSeries: ISeries = {
                 "wins": 8,
                 "defeits": 10,
                 "playedaway": 10,
-                "drawshome": 0,
                 "drawsaway": 3,
                 "defeitshome": 6,
                 "defeitsaway": 4,
@@ -223,6 +222,7 @@ export const testSeries: ISeries = {
         {
             "id": "d2e74428-7777-47b8-9ee7-13f7b8cb2b25",
             "title": "Strømsgodset",
+            "slug": "Stroemsgodset",
             "rank": 8,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/d2e74428-7777-47b8-9ee7-13f7b8cb2b25/d2e74428-7777-47b8-9ee7-13f7b8cb2b25.png",
             "data": {
@@ -254,13 +254,13 @@ export const testSeries: ISeries = {
         {
             "id": "ffeebf7a-daa6-4079-9a3e-4a81234b4021",
             "title": "Tromsø",
+            "slug": "Tromsoe",
             "rank": 9,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/ffeebf7a-daa6-4079-9a3e-4a81234b4021/ffeebf7a-daa6-4079-9a3e-4a81234b4021.png",
             "data": {
                 "rank": 9,
                 "points": 31,
                 "winshome": 6,
-                "winsaway": 0,
                 "draws": 10,
                 "played": 23,
                 "wins": 6,
@@ -285,6 +285,7 @@ export const testSeries: ISeries = {
         {
             "id": "bfbbe5c4-1181-4898-b202-8c5a226aa01e",
             "title": "Haugesund",
+            "slug": "FK Haugesund",
             "rank": 10,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/bfbbe5c4-1181-4898-b202-8c5a226aa01e/bfbbe5c4-1181-4898-b202-8c5a226aa01e.png",
             "data": {
@@ -309,13 +310,13 @@ export const testSeries: ISeries = {
                 "goalsagainsthome": 17,
                 "goalsagainstaway": 17,
                 "pointsaway": 9,
-                "pointshome": 17,
-                "trend": 0
+                "pointshome": 17
             }
         },
         {
             "id": "f15ba93e-de54-42c2-a2ca-9a3e47650786",
             "title": "Sarpsborg 08",
+            "slug": "Sarpsborg",
             "rank": 11,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/f15ba93e-de54-42c2-a2ca-9a3e47650786/f15ba93e-de54-42c2-a2ca-9a3e47650786.png",
             "data": {
@@ -332,7 +333,6 @@ export const testSeries: ISeries = {
                 "defeits": 13,
                 "playedhome": 12,
                 "drawshome": 1,
-                "drawsaway": 0,
                 "defeitshome": 6,
                 "goalsforhome": 20,
                 "pointsaway": 9,
@@ -340,13 +340,13 @@ export const testSeries: ISeries = {
                 "defeitsaway": 7,
                 "goalsforaway": 19,
                 "goalsagainstaway": 23,
-                "pointshome": 16,
-                "trend": 0
+                "pointshome": 16
             }
         },
         {
             "id": "c876f4dd-416e-4443-9210-34a70819be5d",
             "title": "Aalesund",
+            "slug": "Aalesund",
             "rank": 12,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/c876f4dd-416e-4443-9210-34a70819be5d/c876f4dd-416e-4443-9210-34a70819be5d.png",
             "data": {
@@ -371,13 +371,13 @@ export const testSeries: ISeries = {
                 "pointshome": 13,
                 "playedaway": 12,
                 "goalsfor": 23,
-                "goalsagainst": 37,
-                "trend": 0
+                "goalsagainst": 37
             }
         },
         {
             "id": "2d9fd89b-8a02-417b-989a-b0b5441a12f3",
             "title": "HamKam",
+            "slug": "Hamarkameratene",
             "rank": 12,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/2d9fd89b-8a02-417b-989a-b0b5441a12f3/2d9fd89b-8a02-417b-989a-b0b5441a12f3.png",
             "data": {
@@ -402,13 +402,13 @@ export const testSeries: ISeries = {
                 "defeits": 6,
                 "playedaway": 10,
                 "defeitsaway": 3,
-                "goalsagainstaway": 15,
-                "trend": 0
+                "goalsagainstaway": 15
             }
         },
         {
             "id": "250949c3-92fa-49db-b60b-d4ae1c9a7c14",
             "title": "Sandefjord",
+            "slug": "Sandefjord",
             "rank": 14,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/250949c3-92fa-49db-b60b-d4ae1c9a7c14/250949c3-92fa-49db-b60b-d4ae1c9a7c14.png",
             "data": {
@@ -425,7 +425,6 @@ export const testSeries: ISeries = {
                 "defeits": 13,
                 "playedhome": 10,
                 "drawshome": 4,
-                "drawsaway": 0,
                 "defeitshome": 5,
                 "defeitsaway": 7,
                 "goalsforhome": 17,
@@ -433,13 +432,13 @@ export const testSeries: ISeries = {
                 "goalsagainstaway": 26,
                 "pointshome": 7,
                 "pointsaway": 15,
-                "playedaway": 12,
-                "trend": 0
+                "playedaway": 12
             }
         },
         {
             "id": "005fd72e-c4dc-4611-a462-8c24c23243af",
             "title": "Kristiansund BK",
+            "slug": "Kristiansund BK",
             "rank": 15,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/005fd72e-c4dc-4611-a462-8c24c23243af/005fd72e-c4dc-4611-a462-8c24c23243af.png",
             "data": {
@@ -464,13 +463,13 @@ export const testSeries: ISeries = {
                 "goalsagainsthome": 21,
                 "goalsagainstaway": 23,
                 "pointsaway": 4,
-                "pointshome": 9,
-                "trend": 0
+                "pointshome": 9
             }
         },
         {
             "id": "980f929d-cf6e-4c27-8172-66c4fbc6942b",
             "title": "Jerv",
+            "slug": "Jerv",
             "rank": 16,
             "logo": "https://static-content.aws42.tv2.no/stage/participant/980f929d-cf6e-4c27-8172-66c4fbc6942b/980f929d-cf6e-4c27-8172-66c4fbc6942b.png",
             "data": {
@@ -479,7 +478,6 @@ export const testSeries: ISeries = {
                 "goalsfor": 20,
                 "goalsagainst": 56,
                 "winshome": 4,
-                "winsaway": 0,
                 "draws": 2,
                 "played": 23,
                 "wins": 4,
@@ -495,8 +493,7 @@ export const testSeries: ISeries = {
                 "goalsagainsthome": 18,
                 "goalsagainstaway": 34,
                 "pointshome": 13,
-                "pointsaway": 1,
-                "trend": 0
+                "pointsaway": 1
             }
         }
     ]

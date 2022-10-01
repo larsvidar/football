@@ -18,8 +18,8 @@ export const Home = () => {
 
 	/*** Effects ***/
 	useEffect(() => {
-		//fetchSeries();
-		setSeries(testSeries);
+		fetchSeries();
+		//setSeries(testSeries);
 	}, []);
 
 

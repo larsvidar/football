@@ -1,5 +1,5 @@
-import {IMatch} from "types/matches";
-import {ISeries, ITeam, ITeamData} from "types/series";
+import {IMatch} from 'types/matches';
+import {ISeries, ITeam, ITeamData} from 'types/series';
 
 export const formatSeries = (rawData: any): ISeries | null => {
 	const data = rawData?.data?.tournamentStage;
@@ -24,6 +24,7 @@ export const formatTeam = (team: any): ITeam | null => {
 	const newTeam: ITeam = {
 		id: team.participant?.id,
 		title: team.participant?.name,
+		slug: getTeamSlug(team.participant?.name) || team.participant?.name,
 		rank: team.rank,
 		logo: team.participant?.images?.[0]?.url,
 	}
@@ -58,4 +59,34 @@ export const formatMatches = (rawData: any): IMatch[] | null => {
 	}) 
 
 	return matches;
+}
+
+
+export const getTeamSlug = (title: string, slug?: string) => {
+
+	const slugs: any = {
+		'Molde': 'Molde',
+		'Lillestrøm': 'Lillestroem',
+		'Rosenborg': 'Rosenborg',
+		'FK Bodø/Glimt': 'Bodoe/Glimt',
+		'Vålerenga': 'Vaalerenga',
+		'Viking': 'Viking',
+		'Odd': 'Odds Ballklubb',
+		'Strømsgodset': 'Stroemsgodset',
+		'Tromsø': 'Tromsoe',
+		'Haugesund': 'FK Haugesund',
+		'Sarpsborg 08': 'Sarpsborg',
+		'Aalesund': 'Aalesund',
+		'HamKam': 'Hamarkameratene',
+		'Sandefjord': 'Sandefjord',
+		'Kristiansund': 'Kristiansund BK',
+		'Jerv': 'Jerv',
+	};
+
+	if(slug) {
+		const item = Object.keys(slugs).find((key) => slugs[key] === slug) || {};
+		return Object.values(item)[0];
+	}
+
+	return slugs[title];
 }
