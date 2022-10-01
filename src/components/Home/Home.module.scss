@@ -1,0 +1,29 @@
+.Home {
+	background: lightgray;
+	padding: 1em;
+	border-radius: 10px;
+
+	table {
+		border: solid 1px #aaa;
+		border-radius: 10px;
+		background: white;
+
+		thead, tbody {
+			tr {
+				th, td {
+					text-align: left;
+					padding-right: 1em;
+
+					&:first-child {
+						cursor: pointer;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+				
+			}
+		}
+	}
+}

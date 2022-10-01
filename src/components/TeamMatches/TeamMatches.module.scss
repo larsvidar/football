@@ -1,0 +1,21 @@
+.TeamMatches {
+	background: #eee;
+	padding: 1em;
+
+	table {
+		background: white;
+		text-align: left;
+		border-collapse: collapse;
+
+		thead, tbody {
+			tr {
+				
+				th, td {
+					padding: .3em;
+					padding-right: 1em;
+					border: solid 1px #ddd;
+				}
+			}
+		}
+	}
+}
