@@ -3,7 +3,6 @@ import {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import {IMatch} from 'types/matches';
 import {ITeam} from 'types/tournament';
 import {Fetcher} from 'utils/Fetcher';
-import {formatMatches} from 'utils/formatters';
 import styles from './TeamMatches.module.scss';
 
 
@@ -51,11 +50,10 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 		const teamMatches = await fetcher.getTeamMatches(teamId, fromDate, toDate);
 		if(teamMatches instanceof Error) return console.log(teamMatches.message);
 
-		setMatches(formatMatches(teamMatches));
+		setMatches(teamMatches);
 	};
 
 
-	console.log(matches)
 	/*** Return JSX ***/
 	return (
 		<div className={styles.TeamMatches}>

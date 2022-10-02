@@ -1,5 +1,4 @@
-import {ITeam} from "./tournament";
-
+import {ITeam} from './tournament';
 
 export interface IMatch {
 	id: string,

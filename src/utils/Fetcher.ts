@@ -1,4 +1,5 @@
 /***** IMPORTS *****/
+import {genObject} from 'types/general';
 import {IMatch} from 'types/matches';
 import {ITournament} from 'types/tournament';
 import {formatMatches, formatTournament} from './formatters';
@@ -21,9 +22,9 @@ export class Fetcher {
 	 * @returns {Promise<ITournament | null | Error>}
 	 */
 	async getTournament(tournamentId = this.#defaultTournamentId): Promise<ITournament | null | Error> {
-		const query = queries.graphQL.eliteSerien2022(tournamentId);
+		const query = queries.graphQL.tournament(tournamentId);
 
-		const tournament = await this.#fetchData<ITournament | Error>({method: 'POST'}, query);
+		const tournament = await this.#fetchData<genObject | Error>({method: 'POST'}, query);
 		if(tournament instanceof Error) return tournament;
 		return formatTournament(tournament);
 	}
@@ -39,7 +40,8 @@ export class Fetcher {
 	async getTeamMatches(teamId = '', fromDate: string, toDate: string): Promise<IMatch[] | null | Error> {
 		const query = queries.graphQL.teamMatches(teamId, fromDate, toDate);
 
-		const matches = await this.#fetchData({method: 'POST'}, query);
+		const matches = await this.#fetchData<genObject>({method: 'POST'}, query);
+		if(matches instanceof Error) return matches;
 		return formatMatches(matches);
 	}
 
@@ -50,13 +52,13 @@ export class Fetcher {
 	 * @param {any} data Data to be attached to the request-body 
 	 * @returns {Promise<T | Error>} Returns passed data-type, or error
 	 */
-	async #fetchData<T>(options: any, data?: any): Promise<T | Error> {
+	async #fetchData<T>(options: genObject, data?: unknown): Promise<T | Error> {
 		if(!options.method) options.method = 'GET';
 		if(data) options.body = JSON.stringify(data);
 
 		const response: Response | Error = await fetch(this.#apiUrl, options).catch((error) => error);
 		if(response instanceof Error) return response;
-		const result: T | Error = await response.json().catch((error: any) => error);
+		const result: T | Error = await response.json().catch((error) => error);
 		return result;
 	}
 }

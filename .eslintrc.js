@@ -26,6 +26,7 @@ module.exports = {
 		'linebreak-style': ['warn', 'unix'],
 		'react-hooks/exhaustive-deps': ['off'],
 		'@next/next/no-img-element': ['off'],
-		'@typescript-eslint/explicit-function-return-type': ['warn']
+		'@typescript-eslint/explicit-function-return-type': ['warn'],
+		'no-mixed-spaces-and-tabs': ['warn'],
 	}
 };
