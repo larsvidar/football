@@ -44,7 +44,7 @@ export const TeamMatches = ({teamState}: any) => {
 		<div className={styles.TeamMatches}>
 			<p className={styles.goBack} onClick={() => setTeam(null)}>Gå tilbake</p>
 			<h2>Kamper for {team.title}</h2>
-			<table>
+			<table className={styles.table}>
 				<thead>
 					<tr>
 						<th>Kamp</th>

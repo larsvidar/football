@@ -1,14 +1,21 @@
+@import 'styles/variables.scss';
+
 .TeamMatches {
+	display: inline-flex;
+	flex-direction: column;
 	background: #eee;
 	padding: 1em;
+	overflow: auto;
 
 	.goBack {
 		position: absolute;
+		top: 1em;
 		right: 2em;
 		cursor: pointer;
+		font-style: italic;
 
 		&::before {
-			content: '< ';
+			content: '← ';
 		}
 
 		&:hover {
@@ -16,20 +23,7 @@
 		}
 	}
 
-	table {
-		background: white;
-		text-align: left;
-		border-collapse: collapse;
-
-		thead, tbody {
-			tr {
-				
-				th, td {
-					padding: .3em;
-					padding-right: 1em;
-					border: solid 1px #ddd;
-				}
-			}
-		}
+	.table {
+		@include table;
 	}
 }
