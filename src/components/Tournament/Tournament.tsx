@@ -1,28 +1,41 @@
 /***** IMPORTS *****/
 import {TeamMatches} from 'components/TeamMatches/TeamMatches';
+import {useRouter} from 'next/router';
 import {FC, useEffect, useState} from 'react';
 import {Fetcher} from 'utils/Fetcher';
 import {ITournament, ITeam} from '../../types/tournament';
 import styles from './Tournament.module.scss';
 
 
+/***** TYPES *****/
+interface ITournamentProps {
+	data: ITournament,
+}
+
+
 /***** COMPONENT *****/
-export const Tournament: FC = (): JSX.Element => {
+export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 
 	/*** Variables ***/
 	const fetcher = new Fetcher();
+	const router = useRouter();
+	const UPDATE_INTERVAL = 60 * 1000; //60 seconds
 
 	/*** State ***/
-	const [tournament, setTournament] = useState<ITournament | null | undefined>();
+	const [tournament, setTournament] = useState<ITournament | null | undefined>(data);
 	const [team, setTeam] = useState<ITeam | null>(null);
 
 
 	/*** Effects ***/
 
 	//Runs once
-	//	- Fetches tournament-data
+	// - Fetches tournament-data
 	useEffect(() => {
-		fetchTournament();
+		const interval = setInterval(fetchTournament, UPDATE_INTERVAL);
+		
+		return () => {
+			clearInterval(interval);
+		};
 	}, []);
 
 
@@ -49,6 +62,7 @@ export const Tournament: FC = (): JSX.Element => {
 	return (
 		<div className={styles.Tournament}>
 			<h2>{tournament.title}</h2>
+			<p>(Tabellen oppdateres hvert minutt)</p>
 
 			{team &&
 				<TeamMatches teamState={[team, setTeam]} />
