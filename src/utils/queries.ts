@@ -1,8 +1,7 @@
-export const config = {
-	apiUrl: process.env.NEXT_PUBLIC_APIURL || '',
+export const queries = {
 	graphQL: {
-		queries: {
-			eliteSerien2022: {
+		eliteSerien2022(tournamentId = '') {
+			return {
 				query: `query table($tournamentStageId: ID!) {
 					tournamentStage(id: $tournamentStageId) {
 						name
@@ -23,42 +22,42 @@ export const config = {
 					}
 				}`,
 				variables: {
-					tournamentStageId: process.env.NEXT_PUBLIC_ELITESERIEN_ID || '',
+					tournamentStageId: tournamentId,
 				}, 
-			},
+			}
+		},
 
-			teamMatches: {
-				query: `query teamMatches(
-					$participantId: ID!, 
-					$fromDate: LocalDate!, 
-					$toDate: LocalDate!
+		teamMatches: {
+			query: `query teamMatches(
+				$participantId: ID!, 
+				$fromDate: LocalDate!, 
+				$toDate: LocalDate!
+			) {
+				eventsByParticipantAndDateRange(
+					participantId: $participantId, 
+					fromDate: $fromDate, 
+					toDate: $toDate
 				) {
-					eventsByParticipantAndDateRange(
-						participantId: $participantId, 
-						fromDate: $fromDate, 
-						toDate: $toDate
-					) {
-						id
-						startDate
+					id
+					startDate
+					name
+					tournamentStage {
 						name
-						tournamentStage {
+					}
+					participants {
+						participant {
+							id
 							name
-						}
-						participants {
-							participant {
-								id
-								name
-								images {url}
-							}
+							images {url}
 						}
 					}
-				}`,
-				variables: {
-					participantId: '', 
-					fromDate: new Date().toLocaleDateString(), 
-					toDate: new Date().toLocaleDateString(),
 				}
-			},
+			}`,
+			variables: {
+				participantId: '', 
+				fromDate: new Date().toLocaleDateString(), 
+				toDate: new Date().toLocaleDateString(),
+			}
 		},
-	}
+	},
 }

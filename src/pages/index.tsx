@@ -1,10 +1,10 @@
-import {Results} from 'components/Results/Results';
+import {Tournament} from 'components/Tournament/Tournament';
 import type {NextPage} from 'next';
 
 
 const Home: NextPage = () => {
   return (
-	<Results />
+	<Tournament />
   );
 }
 

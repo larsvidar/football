@@ -1,49 +1,45 @@
 /***** IMPORTS *****/
 import {TeamMatches} from "components/TeamMatches/TeamMatches";
-import {useEffect, useState} from "react";
-import {config} from "utils/queries";
-import {formatSeries} from "utils/formatters";
-import {ISeries, ITeam} from "../../types/series";
-import styles from './Results.module.scss';
-import Image from "next/image";
+import {FC, useEffect, useState} from "react";
+import {Fetcher} from "utils/Fetcher";
+import {formatTournament} from "utils/formatters";
+import {ITournament, ITeam} from "../../types/tournament";
+import styles from './Tournament.module.scss';
 
 
 /***** COMPONENT *****/
-export const Results = () => {
+export const Tournament: FC = (): JSX.Element => {
+
+	/*** Variables ***/
+	const fetcher = new Fetcher();
 
 	/*** State ***/
-	const [series, setSeries] = useState<ISeries | null>(null);
+	const [tournament, setTournament] = useState<ITournament | null>(null);
 	const [team, setTeam] = useState<ITeam | null>(null);
 
 
 	/*** Effects ***/
 	useEffect(() => {
-		fetchSeries();
+		fetchTournament();
 		//setSeries(testSeries);
 	}, []);
 
 
 	/*** Functions ***/
-	const fetchSeries = async (): Promise<void> => {
-		const query = config.graphQL.queries.eliteSerien2022.query;
-		const variables = config.graphQL.queries.eliteSerien2022.variables;
-		const body = {query, variables}
+	const fetchTournament = async (): Promise<void> => {
+		const tournament = await fetcher.getTournament();
+		if(tournament instanceof Error) return console.log(tournament.message);
 
-		const response: Response | Error = await fetch(config.apiUrl, {method: 'post', body: JSON.stringify(body)}).catch((error) => error);
-		if(response instanceof Error) return console.log('ERROR FETCHING DATA: ', response.message);
-		const result: any | Error = await response.json().catch((error: any) => error);
-		if(result instanceof Error) return console.log(result.message);
-
-		setSeries(formatSeries(result))
+		setTournament(formatTournament(tournament))
 	};
 
-	console.log(series)
+	console.log(tournament)
 
 	/*** Return-JSX ***/
-	if(!series?.title) return <p>Ingen data funnet</p>
+	if(!tournament?.title) return <p style={{color: 'white'}}>Ingen data funnet ...</p>
 	return (
-		<div className={styles.Results}>
-			<h2>{series.title}</h2>
+		<div className={styles.Tournament}>
+			<h2>{tournament.title}</h2>
 
 			{team && 
 				<TeamMatches teamState={[team, setTeam]} />
@@ -65,7 +61,7 @@ export const Results = () => {
 					</thead>
 
 					<tbody>
-						{series.teams?.map((team) => {
+						{tournament.teams?.map((team) => {
 							const {data} = team;
 							return (
 								<tr key={team.id}>

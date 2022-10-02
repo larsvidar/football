@@ -37,7 +37,7 @@ export interface ITeam {
 }
 
 
-export interface ISeries {
+export interface ITournament {
 	title: string,
 	teams?: ITeam[],
 }

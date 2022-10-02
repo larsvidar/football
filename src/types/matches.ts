@@ -1,4 +1,4 @@
-import {ITeam} from "./series";
+import {ITeam} from "./tournament";
 
 
 export interface IMatch {

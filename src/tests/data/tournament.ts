@@ -1,6 +1,6 @@
-import {ISeries} from "types/series";
+import {ITournament} from "types/tournament";
 
-export const testSeries: ISeries = {
+export const testTournament: ITournament = {
     "title": "Eliteserien",
     "teams": [
         {

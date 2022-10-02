@@ -1,13 +1,13 @@
 import {IMatch} from 'types/matches';
-import {ISeries, ITeam, ITeamData} from 'types/series';
+import {ITournament, ITeam, ITeamData} from 'types/tournament';
 
-export const formatSeries = (rawData: any): ISeries | null => {
+export const formatTournament = (rawData: any): ITournament | null => {
 	const data = rawData?.data?.tournamentStage;
 	if(!data) return null;
 	
 	const teams: ITeam[] = data.standings?.[0].participants.map((team: any) => formatTeam(team));
 
-	const newData: ISeries = {
+	const newData: ITournament = {
 		title: data.name,
 		teams,
 	}
