@@ -1,9 +1,7 @@
 /***** IMPORTS *****/
 import {TeamMatches} from 'components/TeamMatches/TeamMatches';
-import Image from 'next/image';
 import {FC, useEffect, useState} from 'react';
 import {Fetcher} from 'utils/Fetcher';
-import {formatTournament} from 'utils/formatters';
 import {ITournament, ITeam} from '../../types/tournament';
 import styles from './Tournament.module.scss';
 
@@ -37,9 +35,9 @@ export const Tournament: FC = (): JSX.Element => {
 	 */
 	const fetchTournament = async (): Promise<void> => {
 		const tournament = await fetcher.getTournament();
-		if (tournament instanceof Error) return console.log(tournament.message);
+		if(tournament instanceof Error) return console.log(tournament.message);
 
-		setTournament(formatTournament(tournament));
+		setTournament(tournament);
 	};
 
 
@@ -74,8 +72,8 @@ export const Tournament: FC = (): JSX.Element => {
 							return (
 								<tr key={team.id}>
 									<td>{team.rank}. </td>
-									<td><Image src={team.logo || ''} alt={team.title} height={'32px'} /></td>
-									<td onClick={() => setTeam(team)}>
+									<td><img src={team.logo || ''} alt={team.title} height={32} /></td>
+									<td onClick={(): void => setTeam(team)}>
 										{team.title}
 									</td>
 									<td>{data?.played}</td>

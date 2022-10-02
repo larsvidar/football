@@ -1,43 +1,31 @@
 module.exports = {
-	'env': {
+	env: {
 		'browser': true,
 		'es2021': true
 	},
-	'extends': [
+	extends: [
 		'eslint:recommended',
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'next/core-web-vitals'
 	],
-	'overrides': [
-	],
-	'parser': '@typescript-eslint/parser',
-	'parserOptions': {
+	overrides: [],
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
 		'ecmaVersion': 'latest',
 		'sourceType': 'module'
 	},
-	'plugins': [
+	plugins: [
 		'react',
 		'@typescript-eslint'
 	],
-	'rules': {
-		'indent': [
-			'warn',
-			'tab'
-		],
-		'linebreak-style': [
-			'warn',
-			'unix'
-		],
-		'quotes': [
-			'warn',
-			'single'
-		],
-		'semi': [
-			'warn',
-			'always'
-		],
-		'react-hooks/exhaustive-deps': ['off']
-
+	rules: {
+		indent: ['warn', 'tab'],
+		quotes: ['warn', 'single'],
+		semi: ['warn', 'always'],
+		'linebreak-style': ['warn', 'unix'],
+		'react-hooks/exhaustive-deps': ['off'],
+		'@next/next/no-img-element': ['off'],
+		'@typescript-eslint/explicit-function-return-type': ['warn']
 	}
 };
