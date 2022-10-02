@@ -1,7 +1,7 @@
 /***** IMPORTS *****/
 import {TeamMatches} from 'components/TeamMatches/TeamMatches';
 import {useRouter} from 'next/router';
-import {FC, useEffect, useState} from 'react';
+import {FC, MouseEvent, MouseEventHandler, SyntheticEvent, useEffect, useState} from 'react';
 import {Fetcher} from 'utils/Fetcher';
 import {ITournament, ITeam} from '../../types/tournament';
 import styles from './Tournament.module.scss';
@@ -39,6 +39,14 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	}, []);
 
 
+	useEffect(() => {
+		const teamId = router.query.team;
+		const foundTeam = tournament?.teams?.find?.((thisTeam) => thisTeam.id === teamId);
+		if(foundTeam) setTeam(foundTeam);
+		else(setTeam(null));
+	}, [router]);
+
+
 	/*** Functions ***/
 
 	/**
@@ -53,6 +61,17 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 		}
 
 		setTournament(tournament);
+	};
+
+
+	const handleTeamClick = (event: MouseEvent<HTMLDivElement>): void => {
+		const target = event.target as HTMLDivElement;
+		const teamId = target.dataset.id;
+
+		if(teamId) {
+			const params = '?' + new URLSearchParams({team: teamId}).toString();
+			router.push(params);
+		}
 	};
 
 
@@ -90,7 +109,10 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 								<tr key={team.id}>
 									<td>{team.rank}. </td>
 									<td><img src={team.logo || ''} alt={team.title} height={32} /></td>
-									<td onClick={(): void => setTeam(team)}>
+									<td 
+										onClick={handleTeamClick}
+										data-id={team.id}
+									>
 										{team.title}
 									</td>
 									<td>{data?.played}</td>

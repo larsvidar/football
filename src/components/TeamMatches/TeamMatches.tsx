@@ -1,4 +1,5 @@
 /***** IMPORTS *****/
+import {useRouter} from 'next/router';
 import {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import {IMatch} from 'types/matches';
 import {ITeam} from 'types/tournament';
@@ -18,9 +19,10 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 
 	/*** Variables ***/
 	const fetcher = new Fetcher();
+	const router = useRouter();
 
 	/*** State ***/
-	const [team, setTeam] = teamState;
+	const [team] = teamState;
 	const [matches, setMatches] = useState<IMatch[] | null | undefined>();
 
 
@@ -63,7 +65,7 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 	/*** Return JSX ***/
 	return (
 		<div className={styles.TeamMatches}>
-			<p className={styles.goBack} onClick={(): void => setTeam(null)}>Gå tilbake</p>
+			<p className={styles.goBack} onClick={(): void => {router.push('');}}>Gå tilbake</p>
 			<h2>Kommende kamper for {team.title}</h2>
 			<table className={styles.table}>
 				<thead>
