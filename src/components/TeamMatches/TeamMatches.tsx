@@ -7,31 +7,56 @@ import {addZero} from 'utils/utils';
 import styles from './TeamMatches.module.scss';
 
 
+/***** TYPES *****/
+interface ITeamMatchesProps {
+	data?: IMatch[] | null,
+}
+
+
 /***** COMPONENT *****/
-export const TeamMatches: FC = (): JSX.Element => {
+export const TeamMatches: FC<ITeamMatchesProps> = ({data}): JSX.Element => {
 
 	/*** Variables ***/
 	const fetcher = new Fetcher();
 	const router = useRouter();
+	const teamId = router.query.team as string;
+	const UPDATE_INTERVAL = 60 * 1000; //60 seconds
 
 	/*** State ***/
-	const [matches, setMatches] = useState<IMatch[] | null | undefined>();
+	const [matches, setMatches] = useState<IMatch[] | null | undefined>(data);
 
 
 	/*** Effects ***/
+
+	/**
+	 * Runs once
+	 * 	- Sets up interval for refetching data.
+	 */
+	useEffect(() => {
+		const interval = setInterval(() => fetchTeam(teamId), UPDATE_INTERVAL);
+		return () => {
+			clearInterval(interval);
+		};
+	}, []);
+
 
 	/**
 	 * Runs when team-state updates
 	 * 	- Fetches team-matches
 	 */
 	useEffect(() => {
-		const teamId = router.query.team;
 		if(teamId) fetchTeam(teamId as string);
 	}, [router]);
 
 
 
 	/*** Functions ***/
+
+	/**
+	 * Fetches current teams title from teams-array
+	 * 	- Finds correct team based on team-id from url-params.
+	 * @returns {string} Team-title, or empty string.
+	 */
 	function getTeamTitle(): string {
 		const teamId = router.query.team;
 		if(!teamId || !matches?.length) return '';
@@ -41,6 +66,7 @@ export const TeamMatches: FC = (): JSX.Element => {
 
 		return team.title;
 	}
+
 
 	/**
 	 * Fetches array of team matches.

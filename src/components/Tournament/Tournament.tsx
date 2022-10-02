@@ -1,6 +1,7 @@
 /***** IMPORTS *****/
 import {TeamMatches} from 'components/TeamMatches/TeamMatches';
 import {useRouter} from 'next/router';
+import {IPropType} from 'pages';
 import {FC, MouseEvent, useEffect, useState} from 'react';
 import {Fetcher} from 'utils/Fetcher';
 import {ITournament} from '../../types/tournament';
@@ -9,7 +10,7 @@ import styles from './Tournament.module.scss';
 
 /***** TYPES *****/
 interface ITournamentProps {
-	data: ITournament,
+	data: IPropType,
 }
 
 
@@ -22,11 +23,12 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	const teamId = router.query.team;
 	const UPDATE_INTERVAL = 10 * 1000; //60 seconds
 
+
 	/*** State ***/
-	const [tournament, setTournament] = useState<ITournament | null | undefined>(data);
+	const [tournament, setTournament] = useState<ITournament | null | undefined>(data.tournament);
 	const [isUpdating, setIsUpDating] = useState(false);
 
-
+	
 	/*** Effects ***/
 
 	//Runs once
@@ -86,7 +88,7 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 				{isUpdating && <p>Oppdaterer ...</p>}
 			</header>
 
-			{teamId && <TeamMatches />}
+			{teamId && <TeamMatches data={data.matches} />}
 			{!teamId &&
 				<table className={styles.table}>
 					<thead>

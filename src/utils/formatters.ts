@@ -40,7 +40,7 @@ export const formatTeam = (rawData: genObject): ITeam | null => {
 		id: rawData.participant?.id,
 		title: rawData.participant?.name,
 		slug: getTeamSlug(rawData.participant?.name) || rawData.participant?.name,
-		rank: rawData.rank,
+		rank: rawData.rank || null,
 		logo: rawData.participant?.images?.[0]?.url,
 	};
 	if(data) newTeam.data = data;

@@ -1,26 +1,48 @@
 /***** IMPORTS *****/
 import {Tournament} from 'components/Tournament/Tournament';
-import type {NextPage} from 'next';
-import {genObject} from 'types/general';
+import type {GetServerSideProps, NextPage} from 'next';
+import {IMatch} from 'types/matches';
+import {ITournament} from 'types/tournament';
 import {ServerFetcher} from 'utils/server/ServerFetcher';
+import {getDates} from 'utils/utils';
+
+
+/***** TYPES *****/
+export interface IPropType  {
+	tournament?: ITournament | null,
+	matches?: IMatch[] | null,
+}
 
 
 /***** COMPONENT *****/
-const Home: NextPage = (props: genObject) => {
+const Home: NextPage<IPropType> = (props) => {
 	return (
-		<Tournament data={props.data} />
+		<Tournament data={props} />
 	);
 };
 
 
-//SSR function
-export const getServerSideProps = async (): Promise<any> => {
-	const props: genObject = {};
+/**
+ * Server-side-functions
+ * Fetches data for server-side rendering.
+ * @returns {genObject}
+ */
+export const getServerSideProps: GetServerSideProps = async ({query}) => {
+	const props: IPropType = {};
 	const fetcher = new ServerFetcher();
-	const response = await fetcher.getTournament();
-	console.log({response})
-	if(response instanceof Error) return {props};
-	props.data = response;
+
+	//Fetches tournament-data
+	const tournament = await fetcher.getTournament();
+	if(!(tournament instanceof Error)) props.tournament = tournament;
+	
+	//Fetches team-matches, if team id is defined.
+	const teamId = query.team as string;
+	if(teamId) {
+		const {fromDate, toDate} = getDates();
+		const matches = await fetcher.getTeamMatches(teamId, fromDate, toDate);
+		if(!(matches instanceof Error)) props.matches = matches;
+	}
+
 	return {props};
 };
 
