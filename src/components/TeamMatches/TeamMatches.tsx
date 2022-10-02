@@ -1,45 +1,44 @@
 /***** IMPORTS *****/
-import {useEffect, useState} from "react";
-import {IMatch} from "types/matches";
-import {formatMatches} from "utils/formatters";
-import {config} from "utils/queries";
+import {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
+import {IMatch} from 'types/matches';
+import {ITeam} from 'types/tournament';
+import {Fetcher} from 'utils/Fetcher';
+import {formatMatches} from 'utils/formatters';
 import styles from './TeamMatches.module.scss';
 
-export const TeamMatches = ({teamState}: any) => {
+/***** TYPES *****/
+interface ITeamMatchesProps {
+	teamState: [ITeam, Dispatch<SetStateAction<ITeam | null>>]
+}
 
+export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}) => {
+
+	const fetcher = new Fetcher();
 	const [team, setTeam] = teamState;
 	const [matches, setMatches] = useState<IMatch[] | null>(null);
 
 
 	useEffect(() => {
 		fetchTeam(team.id);
-	}, [team]) //eslint-disable-line react-hooks/exhaustive-deps
+	}, [team]);
 
 
 	/**
 	 * 
 	 */
 	const fetchTeam = async (teamId: string) => {
-		const query = config.graphQL.queries.teamMatches.query;
-		const variables = config.graphQL.queries.teamMatches.variables;
 		const now = new Date();
 		const year = now.getFullYear();
-		console.log(year)
-		variables.fromDate = (year - 1) + '-01-01';
-		variables.toDate = (year + 2) + '-01-01'
-		variables.participantId = teamId
-		const body = {query, variables}
+		const fromDate = (year - 1) + '-01-01';
+		const toDate = (year + 2) + '-01-01';
+		
+		const teamMatches = fetcher.getTeamMatches(teamId, fromDate, toDate);
+		if(teamMatches instanceof Error) return console.log(teamMatches.message);
 
-		if(matches?.length) return;
-		const response: Response | Error = await fetch(config.apiUrl, {method: 'post', body: JSON.stringify(body)}).catch((error) => error);
-		if(response instanceof Error) return console.log('ERROR FETCHING DATA: ', response.message);
-		const result: any | Error = await response.json().catch((error: any) => error);
-		if(result instanceof Error) return console.log(result.message);
+		setMatches(formatMatches(teamMatches));
+	};
 
-		setMatches(formatMatches(result))
-	}
-
-	console.log(matches)
+	console.log(matches);
 	return (
 		<div className={styles.TeamMatches}>
 			<p className={styles.goBack} onClick={() => setTeam(null)}>Gå tilbake</p>
@@ -65,7 +64,7 @@ export const TeamMatches = ({teamState}: any) => {
 					})}
 				</tbody>
 			</table>
-			
+
 		</div>
 	);
-}
+};

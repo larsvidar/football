@@ -1,9 +1,10 @@
 /***** IMPORTS *****/
-import {TeamMatches} from "components/TeamMatches/TeamMatches";
-import {FC, useEffect, useState} from "react";
-import {Fetcher} from "utils/Fetcher";
-import {formatTournament} from "utils/formatters";
-import {ITournament, ITeam} from "../../types/tournament";
+import {TeamMatches} from 'components/TeamMatches/TeamMatches';
+import Image from 'next/image';
+import {FC, useEffect, useState} from 'react';
+import {Fetcher} from 'utils/Fetcher';
+import {formatTournament} from 'utils/formatters';
+import {ITournament, ITeam} from '../../types/tournament';
 import styles from './Tournament.module.scss';
 
 
@@ -19,6 +20,9 @@ export const Tournament: FC = (): JSX.Element => {
 
 
 	/*** Effects ***/
+
+	//Runs once
+	//	- Fetches tournament-data
 	useEffect(() => {
 		fetchTournament();
 		//setSeries(testSeries);
@@ -26,25 +30,29 @@ export const Tournament: FC = (): JSX.Element => {
 
 
 	/*** Functions ***/
+
+	/**
+	 * Fetching tournament-data and setting it to tournament-state.
+	 * @returns {void}
+	 */
 	const fetchTournament = async (): Promise<void> => {
 		const tournament = await fetcher.getTournament();
-		if(tournament instanceof Error) return console.log(tournament.message);
+		if (tournament instanceof Error) return console.log(tournament.message);
 
-		setTournament(formatTournament(tournament))
+		setTournament(formatTournament(tournament));
 	};
 
-	console.log(tournament)
 
 	/*** Return-JSX ***/
-	if(!tournament?.title) return <p style={{color: 'white'}}>Ingen data funnet ...</p>
+	if (!tournament?.title) return <p style={{color: 'white'}}>Ingen data funnet ...</p>;
 	return (
 		<div className={styles.Tournament}>
 			<h2>{tournament.title}</h2>
 
-			{team && 
+			{team &&
 				<TeamMatches teamState={[team, setTeam]} />
 			}
-			{!team && 
+			{!team &&
 				<table className={styles.table}>
 					<thead>
 						<tr>
@@ -66,7 +74,7 @@ export const Tournament: FC = (): JSX.Element => {
 							return (
 								<tr key={team.id}>
 									<td>{team.rank}. </td>
-									<td><img src={team.logo || ''} alt={team.title} height={'32px'} /></td>
+									<td><Image src={team.logo || ''} alt={team.title} height={'32px'} /></td>
 									<td onClick={() => setTeam(team)}>
 										{team.title}
 									</td>
@@ -77,7 +85,7 @@ export const Tournament: FC = (): JSX.Element => {
 									<td>{data?.goalsfor} - {data?.goalsagainst}</td>
 									<td>{data?.points}</td>
 								</tr>
-							)
+							);
 						})}
 					</tbody>
 				</table>
