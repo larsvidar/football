@@ -25,5 +25,13 @@
 
 	.table {
 		@include table;
+
+		tr {
+			th {
+				&:nth-child(3) {
+					text-align: left;
+				}
+			}
+		}
 	}
 }

@@ -28,5 +28,6 @@ module.exports = {
 		'@next/next/no-img-element': ['off'],
 		'@typescript-eslint/explicit-function-return-type': ['warn'],
 		'no-mixed-spaces-and-tabs': ['warn'],
+		'prefer-const': ['warn'],
 	}
 };

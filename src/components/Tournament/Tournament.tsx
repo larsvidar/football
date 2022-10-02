@@ -23,7 +23,6 @@ export const Tournament: FC = (): JSX.Element => {
 	//	- Fetches tournament-data
 	useEffect(() => {
 		fetchTournament();
-		//setSeries(testSeries);
 	}, []);
 
 

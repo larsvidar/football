@@ -3,6 +3,7 @@ import {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import {IMatch} from 'types/matches';
 import {ITeam} from 'types/tournament';
 import {Fetcher} from 'utils/Fetcher';
+import {addZero} from 'utils/utils';
 import styles from './TeamMatches.module.scss';
 
 
@@ -44,8 +45,10 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 	const fetchTeam = async (teamId: string): Promise<void> => {
 		const now = new Date();
 		const year = now.getFullYear();
-		const fromDate = (year - 1) + '-01-01';
-		const toDate = (year + 2) + '-01-01';
+		const month = addZero(now.getMonth() + 1);
+		const day = addZero(now.getDate());
+		const fromDate = `${year}-${month}-${day}`;
+		const toDate = `${year + 2}-${month}-${day}`;
 		
 		const teamMatches = await fetcher.getTeamMatches(teamId, fromDate, toDate);
 		if(teamMatches instanceof Error) return console.log(teamMatches.message);
@@ -58,11 +61,13 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 	return (
 		<div className={styles.TeamMatches}>
 			<p className={styles.goBack} onClick={(): void => setTeam(null)}>Gå tilbake</p>
-			<h2>Kamper for {team.title}</h2>
+			<h2>Kommende kamper for {team.title}</h2>
 			<table className={styles.table}>
 				<thead>
 					<tr>
 						<th>Kamp</th>
+						<th></th>
+						<th>Liga</th>
 						<th>Kampdato</th>
 						<th>Kamptid</th>
 					</tr>
@@ -73,6 +78,8 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 						return (
 							<tr key={match.id}>
 								<td>{match.title}</td>
+								<td></td>
+								<td>{match.tournament}</td>
 								<td>{match.startDate}</td>
 								<td>{match.startTime}</td>
 							</tr>
