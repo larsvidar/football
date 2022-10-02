@@ -116,8 +116,8 @@ export const getTeamSlug = (title?: string, slug?: string): string => {
 	};
 
 	if(slug) {
-		const item = Object.keys(slugs).find((key) => slugs[key] === slug) || {};
-		return Object.keys(item)[0];
+		const item = Object.keys(slugs).find((key) => slugs[key] === slug) || slug;
+		return item;
 	}
 
 	return slugs[title || 'none'];

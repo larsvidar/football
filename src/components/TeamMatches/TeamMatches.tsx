@@ -3,6 +3,7 @@ import {useRouter} from 'next/router';
 import {FC, useEffect, useState} from 'react';
 import {IMatch} from 'types/matches';
 import {Fetcher} from 'utils/Fetcher';
+import {getTeamSlug} from 'utils/formatters';
 import {addZero} from 'utils/utils';
 import styles from './TeamMatches.module.scss';
 
@@ -110,9 +111,13 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({data}): JSX.Element => {
 					{matches === null && <tr><td>Ingen data funnet ...</td></tr>}
 					{!matches && <tr><td>... henter lag-data</td></tr>}
 					{matches?.map((match) => {
+						const teamsSlug = match.title.split('-');
+						const homeTeam = getTeamSlug(undefined, teamsSlug[0]);
+						const awayTeam = getTeamSlug(undefined, teamsSlug[1]);
+	
 						return (
 							<tr key={match.id}>
-								<td>{match.title}</td>
+								<td>{homeTeam} - {awayTeam}</td>
 								<td></td>
 								<td>{match.tournament}</td>
 								<td>{match.startDate}</td>

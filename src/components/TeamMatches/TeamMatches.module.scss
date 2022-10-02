@@ -4,7 +4,6 @@
 	display: inline-flex;
 	flex-direction: column;
 	background: #eee;
-	padding: 1em;
 	overflow: auto;
 
 	.goBack {
@@ -30,6 +29,17 @@
 			th {
 				&:nth-child(3) {
 					text-align: left;
+				}
+			}
+
+			td {
+				&:nth-child(3) {
+					text-align: left;
+					cursor: default !important;
+
+					&:hover {
+						text-decoration: none !important;
+					}
 				}
 			}
 		}
