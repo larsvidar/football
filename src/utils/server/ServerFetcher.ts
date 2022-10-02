@@ -11,7 +11,7 @@ export class ServerFetcher {
 
 	/*** Variables ***/
 	#apiUrl = process.env.APIURL || '';
-	#defaultTournamentId = process.env.ELITESERIEN_ID || '';
+	#defaultTournamentId = process.env.DEFAULT_TOURNAMENT_ID || '';
 
 
 	/*** Methods ***/

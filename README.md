@@ -1,6 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+First of all, create an .env.local file (use _example.env.local_ as a starting-point).
+Fill out:
+	- APIURL: Url for sending graphql-requests.
+	- DEFAULT_TOURNAMENT_ID: Id of tournament to be loaded if no other tournament-id is defined.
 
 To run the development server:
 
