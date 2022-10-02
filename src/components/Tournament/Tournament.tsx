@@ -1,9 +1,9 @@
 /***** IMPORTS *****/
 import {TeamMatches} from 'components/TeamMatches/TeamMatches';
 import {useRouter} from 'next/router';
-import {FC, MouseEvent, MouseEventHandler, SyntheticEvent, useEffect, useState} from 'react';
+import {FC, MouseEvent, useEffect, useState} from 'react';
 import {Fetcher} from 'utils/Fetcher';
-import {ITournament, ITeam} from '../../types/tournament';
+import {ITournament} from '../../types/tournament';
 import styles from './Tournament.module.scss';
 
 
@@ -19,11 +19,12 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	/*** Variables ***/
 	const fetcher = new Fetcher();
 	const router = useRouter();
-	const UPDATE_INTERVAL = 60 * 1000; //60 seconds
+	const teamId = router.query.team;
+	const UPDATE_INTERVAL = 10 * 1000; //60 seconds
 
 	/*** State ***/
 	const [tournament, setTournament] = useState<ITournament | null | undefined>(data);
-	const [team, setTeam] = useState<ITeam | null>(null);
+	const [isUpdating, setIsUpDating] = useState(false);
 
 
 	/*** Effects ***/
@@ -39,14 +40,6 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	}, []);
 
 
-	useEffect(() => {
-		const teamId = router.query.team;
-		const foundTeam = tournament?.teams?.find?.((thisTeam) => thisTeam.id === teamId);
-		if(foundTeam) setTeam(foundTeam);
-		else(setTeam(null));
-	}, [router]);
-
-
 	/*** Functions ***/
 
 	/**
@@ -54,7 +47,9 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	 * @returns {void}
 	 */
 	const fetchTournament = async (): Promise<void> => {
+		setIsUpDating(true);
 		const tournament = await fetcher.getTournament();
+		setIsUpDating(false);
 		if(tournament instanceof Error) {
 			setTournament(null);
 			return console.log(tournament.message);
@@ -64,6 +59,11 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	};
 
 
+	/**
+	 * Handles clicking a teams name.
+	 * @param {MouseEvent<HTMLDivElement>} event Click-event-object
+	 * @return {void} Pushes team-id to url-params.
+	 */
 	const handleTeamClick = (event: MouseEvent<HTMLDivElement>): void => {
 		const target = event.target as HTMLDivElement;
 		const teamId = target.dataset.id;
@@ -80,13 +80,14 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	if (!tournament) return <p style={{color: 'white'}}>Vent litt ...</p>;
 	return (
 		<div className={styles.Tournament}>
-			<h2>{tournament.title}</h2>
-			<p>(Tabellen oppdateres hvert minutt)</p>
+			<header>
+				<h1>{tournament.title}</h1>
+				<p>(Tabellen oppdateres hvert minutt)</p>
+				{isUpdating && <p>Oppdaterer ...</p>}
+			</header>
 
-			{team &&
-				<TeamMatches teamState={[team, setTeam]} />
-			}
-			{!team &&
+			{teamId && <TeamMatches />}
+			{!teamId &&
 				<table className={styles.table}>
 					<thead>
 						<tr>

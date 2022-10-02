@@ -1,28 +1,20 @@
 /***** IMPORTS *****/
 import {useRouter} from 'next/router';
-import {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {IMatch} from 'types/matches';
-import {ITeam} from 'types/tournament';
 import {Fetcher} from 'utils/Fetcher';
 import {addZero} from 'utils/utils';
 import styles from './TeamMatches.module.scss';
 
 
-/***** TYPES *****/
-interface ITeamMatchesProps {
-	teamState: [ITeam, Dispatch<SetStateAction<ITeam | null>>]
-}
-
-
 /***** COMPONENT *****/
-export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => {
+export const TeamMatches: FC = (): JSX.Element => {
 
 	/*** Variables ***/
 	const fetcher = new Fetcher();
 	const router = useRouter();
 
 	/*** State ***/
-	const [team] = teamState;
 	const [matches, setMatches] = useState<IMatch[] | null | undefined>();
 
 
@@ -33,11 +25,22 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 	 * 	- Fetches team-matches
 	 */
 	useEffect(() => {
-		fetchTeam(team.id);
-	}, [team]);
+		const teamId = router.query.team;
+		if(teamId) fetchTeam(teamId as string);
+	}, [router]);
+
 
 
 	/*** Functions ***/
+	function getTeamTitle(): string {
+		const teamId = router.query.team;
+		if(!teamId || !matches?.length) return '';
+
+		const team = matches[0].teams.find((team) => team.id === teamId);
+		if(!team) return '';
+
+		return team.title;
+	}
 
 	/**
 	 * Fetches array of team matches.
@@ -66,7 +69,7 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 	return (
 		<div className={styles.TeamMatches}>
 			<p className={styles.goBack} onClick={(): void => {router.push('');}}>Gå tilbake</p>
-			<h2>Kommende kamper for {team.title}</h2>
+			<h2>Kommende kamper for {getTeamTitle()}</h2>
 			<table className={styles.table}>
 				<thead>
 					<tr>
