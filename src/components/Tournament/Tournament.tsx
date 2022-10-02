@@ -13,7 +13,7 @@ export const Tournament: FC = (): JSX.Element => {
 	const fetcher = new Fetcher();
 
 	/*** State ***/
-	const [tournament, setTournament] = useState<ITournament | null>(null);
+	const [tournament, setTournament] = useState<ITournament | null | undefined>();
 	const [team, setTeam] = useState<ITeam | null>(null);
 
 
@@ -34,14 +34,18 @@ export const Tournament: FC = (): JSX.Element => {
 	 */
 	const fetchTournament = async (): Promise<void> => {
 		const tournament = await fetcher.getTournament();
-		if(tournament instanceof Error) return console.log(tournament.message);
+		if(tournament instanceof Error) {
+			setTournament(null);
+			return console.log(tournament.message);
+		}
 
 		setTournament(tournament);
 	};
 
 
 	/*** Return-JSX ***/
-	if (!tournament?.title) return <p style={{color: 'white'}}>Ingen data funnet ...</p>;
+	if(tournament === null) return <p style={{color: 'white'}}>Ingen data funnet ...</p>;
+	if (!tournament) return <p style={{color: 'white'}}>Vent litt ...</p>;
 	return (
 		<div className={styles.Tournament}>
 			<h2>{tournament.title}</h2>

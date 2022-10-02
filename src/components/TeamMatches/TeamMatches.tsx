@@ -21,7 +21,7 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 
 	/*** State ***/
 	const [team, setTeam] = teamState;
-	const [matches, setMatches] = useState<IMatch[] | null>(null);
+	const [matches, setMatches] = useState<IMatch[] | null | undefined>();
 
 
 	/*** Effects ***/
@@ -51,7 +51,10 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 		const toDate = `${year + 2}-${month}-${day}`;
 		
 		const teamMatches = await fetcher.getTeamMatches(teamId, fromDate, toDate);
-		if(teamMatches instanceof Error) return console.log(teamMatches.message);
+		if(teamMatches instanceof Error) {
+			setMatches(null);
+			return console.log(teamMatches.message);
+		}
 
 		setMatches(teamMatches);
 	};
@@ -73,7 +76,8 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({teamState}): JSX.Element => 
 					</tr>
 				</thead>
 				<tbody>
-					{!matches?.length && <tr><td>... henter lag-data</td></tr>}
+					{matches === null && <tr><td>Ingen data funnet ...</td></tr>}
+					{!matches && <tr><td>... henter lag-data</td></tr>}
 					{matches?.map((match) => {
 						return (
 							<tr key={match.id}>

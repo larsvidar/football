@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 	//Process request-object
 	const request = handleRequest(req);
 	const {method, query, data} = request || {};
-	const {teamId, fromDate, toDate} = query || {};
+	const {tournamentId, teamId, fromDate, toDate} = query || {};
 	const fetcher = new ServerFetcher();
 
 	//Check if request is approved
@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 	/*** Handle request ***/
 	let result: ITournament | IMatch[] | Error | null= null;
 	if(data?.includes('tournament')) {
-		result = await fetcher.getTournament();
+		result = await fetcher.getTournament(tournamentId);
 	}
 
 	if(data?.includes('matches')) {

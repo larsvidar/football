@@ -21,7 +21,8 @@ export class ServerFetcher {
 	 * @param {string} tournamentId Id of tournament to fetch.
 	 * @returns {Promise<ITournament | null | Error>}
 	 */
-	async getTournament(tournamentId = this.#defaultTournamentId): Promise<ITournament | null | Error> {
+	async getTournament(tournamentId: string): Promise<ITournament | null | Error> {
+		if(!tournamentId) tournamentId = this.#defaultTournamentId;
 		const query = queries.graphQL.tournament(tournamentId);
 	
 		const tournament = await this.#fetchData<genObject | Error>({method: 'POST'}, query);
