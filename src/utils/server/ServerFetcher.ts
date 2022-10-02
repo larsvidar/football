@@ -10,8 +10,8 @@ import {queries} from 'utils/server/queries';
 export class ServerFetcher {
 
 	/*** Variables ***/
-	#apiUrl = process.env.NEXT_PUBLIC_APIURL || '';
-	#defaultTournamentId = process.env.NEXT_PUBLIC_ELITESERIEN_ID || '';
+	#apiUrl = process.env.APIURL || '';
+	#defaultTournamentId = process.env.ELITESERIEN_ID || '';
 
 
 	/*** Methods ***/
