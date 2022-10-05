@@ -3,8 +3,12 @@
 .TeamMatches {
 	display: inline-flex;
 	flex-direction: column;
-	background: #eee;
+	background: #222;
 	overflow: auto;
+
+	h2 {
+		margin: .5em 0;
+	}
 
 	.goBack {
 		position: absolute;

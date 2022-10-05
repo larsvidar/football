@@ -2,8 +2,7 @@
 import {TeamMatches} from 'components/Tournament/TeamMatches/TeamMatches';
 import {useRouter} from 'next/router';
 import {IPropType} from 'pages';
-import {FC, MouseEvent, useEffect, useState} from 'react';
-import {genObject} from 'types/general';
+import {FC, MouseEvent, SyntheticEvent, useEffect, useRef, useState} from 'react';
 import {Fetcher} from 'utils/Fetcher';
 import {ITournament} from '../../types/tournament';
 import styles from './Tournament.module.scss';
@@ -24,12 +23,12 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	const teamId = router.query.team;
 	const UPDATE_INTERVAL = 10 * 1000; //60 seconds
 	const {tournaments} = data;
+	const tournamentId = useRef(data.tournament?.id || '');
 
 
 	/*** State ***/
 	const [tournament, setTournament] = useState<ITournament | null | undefined>(data.tournament);
 	const [isUpdating, setIsUpDating] = useState(false);
-	const [tournamentId, setTournamentId] = useState(data.tournament?.id)
 
 	
 	/*** Effects ***/
@@ -44,6 +43,14 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 		};
 	}, []);
 
+	//Runs when url updates
+	//	-Gets tournament-id from url and sets it to ref.
+	useEffect(() => {
+		const {id} = router.query;
+		if(id) tournamentId.current = id as string;
+		fetchTournament();
+	}, [router]);
+
 
 	/*** Functions ***/
 
@@ -53,13 +60,14 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	 */
 	const fetchTournament = async (): Promise<void> => {
 		setIsUpDating(true);
-		const tournament = await fetcher.getTournament(tournamentId);
+		const tournament = await fetcher.getTournament(tournamentId.current);
 		setIsUpDating(false);
+		
 		if(tournament instanceof Error) {
 			setTournament(null);
 			return console.log(tournament.message);
 		}
-
+		
 		setTournament(tournament);
 	};
 
@@ -80,13 +88,39 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	};
 
 
+	/**
+	 * Handles selecting new tournament
+	 * @param event Event-object
+	 * @return {void}
+	 */
+	const handleSelect = (event: SyntheticEvent): void => {
+		const target = event.target as HTMLSelectElement;
+		const id = target.value;
+		if(!id) return;
+
+		tournamentId.current = id;
+		const params = '?' + new URLSearchParams({id}).toString();
+		router.push(params);
+	};
+
+
 	/*** Return-JSX ***/
 	if(tournament === null) return <p style={{color: 'white'}}>Ingen data funnet ...</p>;
 	if (!tournament) return <p style={{color: 'white'}}>Vent litt ...</p>;
 	return (
 		<div className={styles.Tournament}>
 			<header>
-				<h1>{tournament.title}</h1>
+				<select onChange={handleSelect} value={tournamentId.current} >
+					<option defaultChecked hidden>{tournament.title}</option>
+					{tournaments?.map?.((tour) => {
+						if(!tour.name) return null;
+						return (
+							<option key={tour.id} value={tour.id}>
+								{tour.name}
+							</option>
+						);
+					})}
+				</select>
 				<p>(Tabellen oppdateres hvert minutt)</p>
 				{isUpdating && <p>Oppdaterer ...</p>}
 			</header>

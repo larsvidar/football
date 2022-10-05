@@ -1,9 +1,11 @@
 @import 'styles/variables.scss';
 
 .Tournament {
+	--frameColor: #222;
+	--textColor: white;
+
 	display: inline-flex;
 	flex-direction: column;
-	background: #222;
 	padding: 1em;
 	border-radius: 10px;
 	position: relative;
@@ -11,13 +13,19 @@
 	max-height: 90vh;
 	width: 80vw;
 	max-width: 1000px;
-	color: white;
+	background: var(--frameColor);
+	color: var(--textColor);
 
 	header {
 		display: flex;
 
-		h1 {
+		select {
 			margin-right: .5em;
+			border: none;
+			font-size: 1.2em;
+			width: 300px;
+			background: var(--frameColor);
+			color: var(--textColor);
 		}
 
 		p {
