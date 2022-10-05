@@ -59,8 +59,21 @@
 			tr {
 				th {
 					span {
-						@media(max-width: 1000px) {
+						@media(max-width: 1050px) {
 							display: none;
+						}
+					}
+
+					
+					&:nth-child(8) {
+						@media(max-width: 1000px) {
+							text-align: center;
+							width: 130px;
+						}
+
+						@media(max-width: 800px) {
+							text-align: center;
+							width: 90px;
 						}
 					}
 				}
@@ -70,6 +83,17 @@
 		tbody, thead {
 			tr {
 				td, th {
+
+					&:first-child {
+						padding-left: 1em;
+					}
+
+					&:last-child {
+						padding-right: 1em;
+					}
+
+
+
 					&:nth-child(3) {
 						@media(max-width: 1000px) {
 							display: none;
