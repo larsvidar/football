@@ -3,7 +3,7 @@
 .Tournament {
 	display: inline-flex;
 	flex-direction: column;
-	background: #eee;
+	background: #222;
 	padding: 1em;
 	border-radius: 10px;
 	position: relative;
@@ -11,6 +11,7 @@
 	max-height: 90vh;
 	width: 80vw;
 	max-width: 1000px;
+	color: white;
 
 	header {
 		display: flex;

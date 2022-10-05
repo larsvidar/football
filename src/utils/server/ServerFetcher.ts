@@ -32,6 +32,20 @@ export class ServerFetcher {
 
 
 	/**
+	 * Method for fetching tournament-data.
+	 * @param {string} tournamentId Id of tournament to fetch.
+	 * @returns {Promise<genObject[] | null | Error>}
+	 */
+	async getTournaments(): Promise<genObject[] | null | Error> {
+		const query = queries.graphQL.tournaments();
+		
+		const tournaments = await this.#fetchData<genObject | Error>({method: 'POST'}, query);
+		if(tournaments instanceof Error) return tournaments;
+		return tournaments.data.tournamentStagesBySport || null;
+	}
+
+
+	/**
 	 * Fetches an array of a teams matches
 	 * @param {string} teamId Id of team to fetch matches for.
 	 * @param {string} fromDate Date to fetch matches from (format YYYY-MM-DD)

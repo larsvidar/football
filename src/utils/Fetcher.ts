@@ -9,6 +9,7 @@ export class Fetcher {
 
 	/*** Variables ***/
 	#tournamentUrl = '/api/tournament';
+	#tournamentsUrl = '/api/tournaments';
 	#matchesUrl = '/api/matches';
 
 
@@ -25,6 +26,16 @@ export class Fetcher {
 		const tournament = await this.#fetchData<ITournament | Error>(this.#tournamentUrl + params);
 		if(tournament instanceof Error) return tournament;
 		return tournament;
+	}
+
+	/**
+	 * Method for fetching tournaments.
+	 * @returns {Promise<ITournament | null | Error>}
+	 */
+	async getTournaments(): Promise<ITournament | null | Error> {
+		const tournaments = await this.#fetchData<ITournament | Error>(this.#tournamentsUrl);
+		if(tournaments instanceof Error) return tournaments;
+		return tournaments;
 	}
 
 

@@ -38,6 +38,7 @@ export interface ITeam {
 
 
 export interface ITournament {
+	id: string,
 	title: string,
 	teams?: ITeam[],
 }

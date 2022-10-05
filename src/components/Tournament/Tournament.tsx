@@ -1,8 +1,9 @@
 /***** IMPORTS *****/
-import {TeamMatches} from 'components/TeamMatches/TeamMatches';
+import {TeamMatches} from 'components/Tournament/TeamMatches/TeamMatches';
 import {useRouter} from 'next/router';
 import {IPropType} from 'pages';
 import {FC, MouseEvent, useEffect, useState} from 'react';
+import {genObject} from 'types/general';
 import {Fetcher} from 'utils/Fetcher';
 import {ITournament} from '../../types/tournament';
 import styles from './Tournament.module.scss';
@@ -22,11 +23,13 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	const router = useRouter();
 	const teamId = router.query.team;
 	const UPDATE_INTERVAL = 10 * 1000; //60 seconds
+	const {tournaments} = data;
 
 
 	/*** State ***/
 	const [tournament, setTournament] = useState<ITournament | null | undefined>(data.tournament);
 	const [isUpdating, setIsUpDating] = useState(false);
+	const [tournamentId, setTournamentId] = useState(data.tournament?.id)
 
 	
 	/*** Effects ***/
@@ -50,7 +53,7 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	 */
 	const fetchTournament = async (): Promise<void> => {
 		setIsUpDating(true);
-		const tournament = await fetcher.getTournament();
+		const tournament = await fetcher.getTournament(tournamentId);
 		setIsUpDating(false);
 		if(tournament instanceof Error) {
 			setTournament(null);
@@ -111,7 +114,11 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 							return (
 								<tr key={team.id}>
 									<td>{team.rank}. </td>
-									<td><img src={team.logo || ''} alt={team.title} height={32} /></td>
+									<td>
+										{team.logo && 
+											<img src={team.logo || ''} alt={team.title} height={32} />
+										}
+									</td>
 									<td 
 										onClick={handleTeamClick}
 										data-id={team.id}

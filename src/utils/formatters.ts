@@ -18,6 +18,7 @@ export const formatTournament = (rawData: genObject): ITournament | null => {
 	const teams: ITeam[] = data.standings?.[0].participants.map((team: genObject) => formatTeam(team));
 
 	const newData: ITournament = {
+		id: data.id,
 		title: data.name,
 		teams,
 	};
@@ -41,7 +42,7 @@ export const formatTeam = (rawData: genObject): ITeam | null => {
 		title: rawData.participant?.name,
 		slug: getTeamSlug(rawData.participant?.name) || rawData.participant?.name,
 		rank: rawData.rank || null,
-		logo: rawData.participant?.images?.[0]?.url,
+		logo: rawData.participant?.images?.[0]?.url || null,
 	};
 	if(data) newTeam.data = data;
 

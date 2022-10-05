@@ -25,9 +25,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 	if(!data?.includes('tournament') && !data?.includes('matches')) return res.status(400).json({error: 'Not found'});
 	
 	/*** Handle request ***/
-	let result: ITournament | IMatch[] | Error | null= null;
+	let result: ITournament | IMatch[] | genObject[] | Error | null= null;
 	if(data?.includes('tournament')) {
 		result = await fetcher.getTournament(tournamentId);
+	}
+
+	if(data?.includes('tournaments')) {
+		result = await fetcher.getTournaments();
 	}
 
 	if(data?.includes('matches')) {
