@@ -6,6 +6,10 @@
 	text-align: left;
 	font-size: 1.2em;
 
+	@media(max-width: 800px) {
+		font-size: .8em;
+	}
+
 
 	thead {
 		border-radius: 10px;

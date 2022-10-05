@@ -131,14 +131,14 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Lag</th>
+							<th><span>Lag</span></th>
 							<th></th>
-							<th>Kamper</th>
-							<th>Vunnet</th>
-							<th>Uavgjort</th>
-							<th>Tap</th>
-							<th>Mål</th>
-							<th>Poeng</th>
+							<th>K<span>amp</span></th>
+							<th>V<span>unnet</span></th>
+							<th>U<span>avgjort</span></th>
+							<th>T<span>ap</span></th>
+							<th>M<span>ål</span></th>
+							<th>P<span>oeng</span></th>
 						</tr>
 					</thead>
 

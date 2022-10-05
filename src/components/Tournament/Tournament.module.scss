@@ -22,20 +22,60 @@
 		select {
 			margin-right: .5em;
 			border: none;
-			font-size: 1.2em;
+			font-size: 1.5em;
 			width: 300px;
 			background: var(--frameColor);
 			color: var(--textColor);
+
+			@media(max-width: 1000px) {
+				font-size: 1.2em;
+				width: 180px;
+			}
 		}
 
 		p {
 			color: #999;
 			margin-top: 10px;
 			margin-right: .5em;
+
+			@media(max-width: 800px) {
+				display: none;
+			}
+		}
+	}
+
+	img {
+		@media(max-width: 1000px) {
+			width: 30px;
+			object-fit: contain;
 		}
 	}
 
 	.table {
 		@include table;
+		
+		thead {
+			tr {
+				th {
+					span {
+						@media(max-width: 1000px) {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+
+		tbody, thead {
+			tr {
+				td, th {
+					&:nth-child(3) {
+						@media(max-width: 1000px) {
+							display: none;
+						}
+					}
+				}
+			}
+		}
 	}
 }

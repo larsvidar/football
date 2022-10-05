@@ -29,20 +29,36 @@
 	.table {
 		@include table;
 
-		tr {
-			th {
-				&:nth-child(3) {
-					text-align: left;
+		thead, tbody {
+			tr {
+				th {
+					&:nth-child(3) {
+						text-align: left;
+					}
 				}
-			}
 
-			td {
-				&:nth-child(3) {
-					text-align: left;
-					cursor: default !important;
+				td {
+					&:nth-child(3) {
+						text-align: left;
+						cursor: default !important;
 
-					&:hover {
-						text-decoration: none !important;
+						&:hover {
+							text-decoration: none !important;
+						}
+					}
+				}
+
+				th, td {
+					&:nth-child(3) {
+						@media(max-width: 1000px) {
+							display: none;
+						}
+					}
+
+					&:nth-child(5) {
+						@media(max-width: 800px) {
+							display: none;
+						}
 					}
 				}
 			}
