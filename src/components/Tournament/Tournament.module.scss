@@ -21,9 +21,10 @@
 
 		select {
 			margin-right: .5em;
+			margin-bottom: .5em;
 			border: none;
 			font-size: 1.5em;
-			width: 300px;
+			width: 280px;
 			background: var(--frameColor);
 			color: var(--textColor);
 
@@ -35,7 +36,7 @@
 
 		p {
 			color: #999;
-			margin-top: 10px;
+			margin-top: 2px;
 			margin-right: .5em;
 
 			@media(max-width: 800px) {

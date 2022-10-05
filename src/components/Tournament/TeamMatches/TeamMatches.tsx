@@ -108,7 +108,7 @@ export const TeamMatches: FC<ITeamMatchesProps> = ({data}): JSX.Element => {
 					</tr>
 				</thead>
 				<tbody>
-					{matches === null && <tr><td>Ingen data funnet ...</td></tr>}
+					{(matches === null || !matches?.length) && <tr><td>Ingen data funnet ...</td></tr>}
 					{!matches && <tr><td>... henter lag-data</td></tr>}
 					{matches?.map((match) => {
 						const teamsSlug = match.title.split('-');

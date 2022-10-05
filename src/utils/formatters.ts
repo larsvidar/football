@@ -15,7 +15,7 @@ export const formatTournament = (rawData: genObject): ITournament | null => {
 	const data = rawData?.data?.tournamentStage;
 	if(!data) return null;
 	
-	const teams: ITeam[] = data.standings?.[0].participants.map((team: genObject) => formatTeam(team));
+	const teams: ITeam[] = data.standings?.[0]?.participants?.map?.((team: genObject) => formatTeam(team));
 
 	const newData: ITournament = {
 		id: data.id,

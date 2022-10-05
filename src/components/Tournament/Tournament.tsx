@@ -21,7 +21,7 @@ export const Tournament: FC<ITournamentProps> = ({data}): JSX.Element => {
 	const fetcher = new Fetcher();
 	const router = useRouter();
 	const teamId = router.query.team;
-	const UPDATE_INTERVAL = 10 * 1000; //60 seconds
+	const UPDATE_INTERVAL = 60 * 1000; //60 seconds
 	const {tournaments} = data;
 	const tournamentId = useRef(data.tournament?.id || '');
 
