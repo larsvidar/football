@@ -1,6 +1,7 @@
 import {ITournament} from 'types/tournament';
 
 export const testTournament: ITournament = {
+	'id': '4e50ba57-d5fe-4370-b2f8-e357ebeb4c83',
 	'title': 'Eliteserien',
 	'teams': [
 		{
